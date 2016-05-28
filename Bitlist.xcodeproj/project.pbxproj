@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		136AA58D1CF815F8005263A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136AA58C1CF815F8005263A9 /* AppDelegate.swift */; };
-		136AA58F1CF815F8005263A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136AA58E1CF815F8005263A9 /* ViewController.swift */; };
 		136AA5921CF815F8005263A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 136AA5901CF815F8005263A9 /* Main.storyboard */; };
 		136AA5951CF815F8005263A9 /* Bitlist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 136AA5931CF815F8005263A9 /* Bitlist.xcdatamodeld */; };
 		136AA5971CF815F8005263A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 136AA5961CF815F8005263A9 /* Assets.xcassets */; };
 		136AA59A1CF815F8005263A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 136AA5981CF815F8005263A9 /* LaunchScreen.storyboard */; };
 		136AA5A51CF815F8005263A9 /* BitlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136AA5A41CF815F8005263A9 /* BitlistTests.swift */; };
 		136AA5B01CF815F8005263A9 /* BitlistUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136AA5AF1CF815F8005263A9 /* BitlistUITests.swift */; };
+		136AA5BE1CF81658005263A9 /* TodosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136AA5BD1CF81658005263A9 /* TodosViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +37,6 @@
 /* Begin PBXFileReference section */
 		136AA5891CF815F8005263A9 /* Bitlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bitlist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		136AA58C1CF815F8005263A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		136AA58E1CF815F8005263A9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		136AA5911CF815F8005263A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		136AA5941CF815F8005263A9 /* Bitlist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bitlist.xcdatamodel; sourceTree = "<group>"; };
 		136AA5961CF815F8005263A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		136AA5AB1CF815F8005263A9 /* BitlistUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BitlistUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		136AA5AF1CF815F8005263A9 /* BitlistUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitlistUITests.swift; sourceTree = "<group>"; };
 		136AA5B11CF815F8005263A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		136AA5BD1CF81658005263A9 /* TodosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TodosViewController.swift; path = ../TodosViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				136AA58C1CF815F8005263A9 /* AppDelegate.swift */,
-				136AA58E1CF815F8005263A9 /* ViewController.swift */,
+				136AA5BD1CF81658005263A9 /* TodosViewController.swift */,
 				136AA5901CF815F8005263A9 /* Main.storyboard */,
 				136AA5961CF815F8005263A9 /* Assets.xcassets */,
 				136AA5981CF815F8005263A9 /* LaunchScreen.storyboard */,
@@ -196,6 +196,7 @@
 				TargetAttributes = {
 					136AA5881CF815F8005263A9 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = RY4LKVN272;
 					};
 					136AA59F1CF815F8005263A9 = {
 						CreatedOnToolsVersion = 7.3;
@@ -259,8 +260,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				136AA58F1CF815F8005263A9 /* ViewController.swift in Sources */,
 				136AA5951CF815F8005263A9 /* Bitlist.xcdatamodeld in Sources */,
+				136AA5BE1CF81658005263A9 /* TodosViewController.swift in Sources */,
 				136AA58D1CF815F8005263A9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,10 +406,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Bitlist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = self.edu.Bitlist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -416,10 +420,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Bitlist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = self.edu.Bitlist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
