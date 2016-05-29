@@ -11,6 +11,8 @@ import UIKit
 class TodosViewController: UIViewController {
     
     @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var tableView: UITableView!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,5 +31,10 @@ class TodosViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func editBarButtonItem(sender: UIBarButtonItem) {
+        
+    }
+    
     
 }

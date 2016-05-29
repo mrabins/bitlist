@@ -15,6 +15,8 @@
 		136AA5A51CF815F8005263A9 /* BitlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136AA5A41CF815F8005263A9 /* BitlistTests.swift */; };
 		136AA5B01CF815F8005263A9 /* BitlistUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136AA5AF1CF815F8005263A9 /* BitlistUITests.swift */; };
 		136AA5BE1CF81658005263A9 /* TodosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136AA5BD1CF81658005263A9 /* TodosViewController.swift */; };
+		13CAF3551CFAB5DC009941CE /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CAF3541CFAB5DC009941CE /* TodoTableViewCell.swift */; };
+		13CAF3571CFAB5F0009941CE /* AddTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CAF3561CFAB5F0009941CE /* AddTodoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		136AA5AF1CF815F8005263A9 /* BitlistUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitlistUITests.swift; sourceTree = "<group>"; };
 		136AA5B11CF815F8005263A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		136AA5BD1CF81658005263A9 /* TodosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TodosViewController.swift; path = ../TodosViewController.swift; sourceTree = "<group>"; };
+		13CAF3541CFAB5DC009941CE /* TodoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
+		13CAF3561CFAB5F0009941CE /* AddTodoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTodoTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				136AA58C1CF815F8005263A9 /* AppDelegate.swift */,
-				136AA5BD1CF81658005263A9 /* TodosViewController.swift */,
+				13CAF3531CFAB190009941CE /* Todo'sViewController */,
 				136AA5901CF815F8005263A9 /* Main.storyboard */,
 				136AA5961CF815F8005263A9 /* Assets.xcassets */,
 				136AA5981CF815F8005263A9 /* LaunchScreen.storyboard */,
@@ -126,6 +130,16 @@
 				136AA5B11CF815F8005263A9 /* Info.plist */,
 			);
 			path = BitlistUITests;
+			sourceTree = "<group>";
+		};
+		13CAF3531CFAB190009941CE /* Todo'sViewController */ = {
+			isa = PBXGroup;
+			children = (
+				136AA5BD1CF81658005263A9 /* TodosViewController.swift */,
+				13CAF3541CFAB5DC009941CE /* TodoTableViewCell.swift */,
+				13CAF3561CFAB5F0009941CE /* AddTodoTableViewCell.swift */,
+			);
+			name = "Todo'sViewController";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +277,8 @@
 				136AA5951CF815F8005263A9 /* Bitlist.xcdatamodeld in Sources */,
 				136AA5BE1CF81658005263A9 /* TodosViewController.swift in Sources */,
 				136AA58D1CF815F8005263A9 /* AppDelegate.swift in Sources */,
+				13CAF3551CFAB5DC009941CE /* TodoTableViewCell.swift in Sources */,
+				13CAF3571CFAB5F0009941CE /* AddTodoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +511,7 @@
 				136AA5B61CF815F8005263A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		136AA5B71CF815F8005263A9 /* Build configuration list for PBXNativeTarget "BitlistTests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +520,7 @@
 				136AA5B91CF815F8005263A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		136AA5BA1CF815F8005263A9 /* Build configuration list for PBXNativeTarget "BitlistUITests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +529,7 @@
 				136AA5BC1CF815F8005263A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
