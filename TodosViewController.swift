@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodosViewController: UIViewController {
+class TodosViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
@@ -32,8 +32,8 @@ class TodosViewController: UIViewController {
         baseArray = [[todo1, todo2, todo3], []]
         print(baseArray)
         
-        
-        
+        tableView.delegate = self
+        tableView.dataSource = self
         
     }
 
@@ -46,5 +46,39 @@ class TodosViewController: UIViewController {
         
     }
     
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 0 {
+            let cell: AddTodoTableViewCell = tableView.dequeueReusableCellWithIdentifier("AddTodoCell") as! AddTodoTableViewCell
+            
+            cell.backgroundColor = UIColor(red: 208/255, green: 198/255, blue: 177/255, alpha: 0.7)
+            
+            return cell
+            
+        }
+        
+        
+        
+        return UITableViewCell()
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        }
+        else if section == 1 {
+            return baseArray[0].count
+        }
+        else if section == 2 {
+            return baseArray[1].count
+        }
+        else {
+            return 0
+        }
+    }
     
 }
