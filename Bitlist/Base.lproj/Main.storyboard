@@ -47,7 +47,7 @@
                                             <outlet property="favoriteButton" destination="uA4-Cb-hFA" id="8Cx-69-3QD"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KbF-6Q-y98" customClass="TodoTableViewCell" customModule="Bitlist" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoCell" id="KbF-6Q-y98" customClass="TodoTableViewCell" customModule="Bitlist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="136" width="330" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KbF-6Q-y98" id="Kfv-My-LT8">

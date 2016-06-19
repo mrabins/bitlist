@@ -53,7 +53,21 @@ class TodosViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             cell.backgroundColor = UIColor(red: 208/255, green: 198/255, blue: 177/255, alpha: 0.7)
             
-            return cell
+        } else if indexPath.section == 1 || indexPath.section == 2 {
+            let currentTodo = baseArray[indexPath.section - 1] [indexPath.row]
+            
+            let cell: TodoTableViewCell = tableView.dequeueReusableCellWithIdentifier("TodoCell") as! TodoTableViewCell
+            
+            cell.titleLabel.text = currentTodo.title
+            
+            let dateStringFormatter = NSDateFormatter()
+            dateStringFormatter.dateFormat = "yyyy-MM-dd"
+            
+            if let date = currentTodo.dueDate {
+                let dateString = dateStringFormatter.stringFromDate(date)
+                cell.dateLabel.text = dateString
+                
+            }
             
         }
         
