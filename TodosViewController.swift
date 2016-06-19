@@ -57,8 +57,6 @@ class TodosViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
         }
         
-        
-        
         return UITableViewCell()
     }
     
