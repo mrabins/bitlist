@@ -95,10 +95,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="VQM-C5-eob">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="ew3-aH-hpW"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="ew3-aH-hpW">
+                            <connections>
+                                <action selector="editBarButtonItemTapped:" destination="BYZ-38-t0r" id="RVd-gw-7jF"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="editButton" destination="ew3-aH-hpW" id="Mp3-ZP-Le4"/>
+                        <outlet property="editButton" destination="ew3-aH-hpW" id="jXZ-op-NEf"/>
                         <outlet property="tableView" destination="22m-zp-zxA" id="cfq-NG-F9z"/>
                     </connections>
                 </viewController>

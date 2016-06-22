@@ -8,16 +8,17 @@
 
 import UIKit
 
-class TodosViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TodosViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
 
+    
     var baseArray: [[TodoModel]] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         editButton.title = "Edit"
@@ -30,22 +31,23 @@ class TodosViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let todo3 = TodoModel(title: "Gym", favorited: false, dueDate: NSDate(), completed: false, repeated: nil, reminder: nil)
         
         baseArray = [[todo1, todo2, todo3], []]
-        print(baseArray)
         
-        tableView.delegate = self
         tableView.dataSource = self
+        tableView.delegate = self
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func editBarButtonItem(sender: UIBarButtonItem) {
+    @IBAction func editBarButtonItemTapped(sender: UIBarButtonItem) {
         
     }
-    
+}
+
+extension TodosViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
@@ -64,8 +66,6 @@ class TodosViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             let dateStringFormatter = NSDateFormatter()
             dateStringFormatter.dateFormat = "yyyy-MM-dd"
-            
-            // NEW CODE STARTS HERE
             
             if let date = currentTodo.dueDate {
                 let dateString = dateStringFormatter.stringFromDate(date)
@@ -100,17 +100,18 @@ class TodosViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return 3
     }
     
-        func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            
-            if section == 0 {
-                return 1
-            } else if section == 1 {
-                return baseArray[0].count
-            } else if section == 2 {
-                return baseArray[1].count
-            } else {
-                return 0
-
-            }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
         }
+        else if section == 1 {
+            return baseArray[0].count
+        }
+        else  if section == 2 {
+            return baseArray[1].count
+        }
+        else {
+            return 0
+        }
+    }
 }
