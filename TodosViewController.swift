@@ -33,6 +33,12 @@ class TodosViewController: UIViewController, UITableViewDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object:  nil)
+        
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,12 +50,41 @@ class TodosViewController: UIViewController, UITableViewDelegate {
         if sender.title == "Edit" {
             if tableView.editing {
                 tableView.setEditing(false, animated: true)
-            } else {
+            }
+            else {
                 tableView.setEditing(true, animated: true)
-                
             }
         }
-        
+
+        else if sender.title == "Done" {
+            let indexPathOfAddTodoCell = NSIndexPath(forRow: 0, inSection: 0)
+            
+            let addTodoTableViewCell = tableView.cellForRowAtIndexPath(indexPathOfAddTodoCell) as! AddTodoTableViewCell
+            
+            if addTodoTableViewCell.addTodoTextField.text != "" {
+                print("if statement evaluating")
+
+            }
+            else {
+                print("else statement evaluating")
+                let alert = UIAlertController(title: "Invalid Todo", message: "Please enter a title before adding a todo", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                presentViewController(alert, animated: true, completion: nil)
+                
+            }
+            
+        }
+    }
+
+    
+    // MARK - Kayboard Notifications
+    
+    func keyboardWillShow(notification: NSNotification) {
+        navigationItem.rightBarButtonItem?.title = "Done"
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        navigationItem.rightBarButtonItem?.title = "Edit"
     }
 }
 
