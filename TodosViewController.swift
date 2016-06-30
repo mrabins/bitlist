@@ -61,9 +61,21 @@ class TodosViewController: UIViewController, UITableViewDelegate {
             
             let addTodoTableViewCell = tableView.cellForRowAtIndexPath(indexPathOfAddTodoCell) as! AddTodoTableViewCell
             
-            if addTodoTableViewCell.addTodoTextField.text != "" {
-                print("if statement evaluating")
+            if addTodoTableViewCell.addTodoTextField.text != " " {
 
+                let newTodo = TodoModel(title: addTodoTableViewCell.addTodoTextField.text!, favorited: addTodoTableViewCell.favorited, dueDate: nil, completed: false, repeated: nil, reminder: nil)
+                
+                baseArray[0].append(newTodo)
+                
+                tableView.reloadData()
+                
+                addTodoTableViewCell.addTodoTextField.text = " "
+                addTodoTableViewCell.addTodoTextField.resignFirstResponder()
+                
+                if addTodoTableViewCell.addTodoTextField.text == nil {
+                    return addTodoTableViewCell.addTodoTextField.text = " "
+                }
+                
             }
             else {
                 print("else statement evaluating")

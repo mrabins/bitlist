@@ -13,6 +13,7 @@ class AddTodoTableViewCell: UITableViewCell {
     @IBOutlet weak var addTodoTextField: UITextField!
     @IBOutlet weak var favoriteButton: UIButton!
     
+    var favorited: Bool = false
 
     override func awakeFromNib() {
         super.awakeFromNib()
