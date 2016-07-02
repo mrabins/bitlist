@@ -72,13 +72,15 @@ class TodosViewController: UIViewController, UITableViewDelegate {
                 addTodoTableViewCell.addTodoTextField.text = " "
                 addTodoTableViewCell.addTodoTextField.resignFirstResponder()
                 
+                
+                
                 if addTodoTableViewCell.addTodoTextField.text == nil {
                     return addTodoTableViewCell.addTodoTextField.text = " "
                 }
                 
             }
             else {
-                print("else statement evaluating")
+
                 let alert = UIAlertController(title: "Invalid Todo", message: "Please enter a title before adding a todo", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 presentViewController(alert, animated: true, completion: nil)
