@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodosViewController: UIViewController, UITableViewDelegate {
+class TodosViewController: UIViewController {
     
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
@@ -30,6 +30,8 @@ class TodosViewController: UIViewController, UITableViewDelegate {
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.tableFooterView = UIView(frame: CGRectZero)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(TodosViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         
@@ -122,7 +124,38 @@ extension TodosViewController: TodoTableViewCellDelegate {
     }
 }
 
+extension TodosViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.separatorInset = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsetsZero
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 2 && baseArray[1].count > 0 {
+            //header height - Might want to change this
+            return 25
+        }
+        return 0
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10.0
+    }
+}
+
 extension TodosViewController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if indexPath.section == 0{
+            return false
+        }
+        return true
+    }
     
     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         if indexPath.section == 1 {
