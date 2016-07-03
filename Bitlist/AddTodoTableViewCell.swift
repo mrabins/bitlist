@@ -18,7 +18,7 @@ class AddTodoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        favoriteButton.backgroundColor = UIColor.orangeColor()
+//        favoriteButton.backgroundColor = UIColor.orangeColor()
         
     }
 

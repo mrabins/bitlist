@@ -55,14 +55,14 @@ class TodosViewController: UIViewController, UITableViewDelegate {
                 tableView.setEditing(true, animated: true)
             }
         }
-
+            
         else if sender.title == "Done" {
             let indexPathOfAddTodoCell = NSIndexPath(forRow: 0, inSection: 0)
             
             let addTodoTableViewCell = tableView.cellForRowAtIndexPath(indexPathOfAddTodoCell) as! AddTodoTableViewCell
             
-            if addTodoTableViewCell.addTodoTextField.text != " " {
-
+            if addTodoTableViewCell.addTodoTextField.text != "" {
+                
                 let newTodo = TodoModel(title: addTodoTableViewCell.addTodoTextField.text!, favorited: addTodoTableViewCell.favorited, dueDate: nil, completed: false, repeated: nil, reminder: nil)
                 
                 baseArray[0].append(newTodo)
@@ -80,7 +80,7 @@ class TodosViewController: UIViewController, UITableViewDelegate {
                 
             }
             else {
-
+                
                 let alert = UIAlertController(title: "Invalid Todo", message: "Please enter a title before adding a todo", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 presentViewController(alert, animated: true, completion: nil)
@@ -89,7 +89,7 @@ class TodosViewController: UIViewController, UITableViewDelegate {
             
         }
     }
-
+    
     
     // MARK - Kayboard Notifications
     
@@ -99,6 +99,33 @@ class TodosViewController: UIViewController, UITableViewDelegate {
     
     func keyboardWillHide(notification: NSNotification) {
         navigationItem.rightBarButtonItem?.title = "Edit"
+    }
+}
+
+extension TodosViewController: TodoTableViewCellDelegate {
+    func completeTodo(indexPath: NSIndexPath) {
+        print("Complete Todo")
+        
+        var selectedTodo = baseArray[indexPath.section - 1][indexPath.row]
+        selectedTodo.completed = !selectedTodo.completed
+        
+        if indexPath.section == 1 {
+            baseArray[1].append(selectedTodo)
+        } else {
+            baseArray[0].append(selectedTodo)
+        }
+        baseArray[indexPath.section - 1].removeAtIndex(indexPath.row)
+        tableView.reloadData()
+        
+    }
+    
+    func favoriteTodo(indexPath: NSIndexPath) {
+        print("Favorite Todo")
+        var selectedToDo = baseArray[indexPath.section - 1][indexPath.row]
+        selectedToDo.favorited = !selectedToDo.favorited
+        
+        baseArray[indexPath.section - 1][indexPath.row] = selectedToDo
+        tableView.reloadData()
     }
 }
 
@@ -119,6 +146,7 @@ extension TodosViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
         if editingStyle == UITableViewCellEditingStyle.Delete {
             tableView.beginUpdates()
             baseArray[indexPath.section - 1].removeAtIndex(indexPath.row)
@@ -132,6 +160,7 @@ extension TodosViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             let cell: AddTodoTableViewCell = tableView.dequeueReusableCellWithIdentifier("AddTodoCell") as! AddTodoTableViewCell
             cell.backgroundColor = UIColor(red: 208/255, green: 198/255, blue: 177/255, alpha: 0.7)
+            cell.favoriteButton.backgroundColor = UIColor.orangeColor()
             return cell
         } else if indexPath.section == 1 || indexPath.section == 2 {
             let currentTodo = baseArray[indexPath.section - 1][indexPath.row]
@@ -162,6 +191,9 @@ extension TodosViewController: UITableViewDataSource {
             
             cell.backgroundColor = UIColor(red: 235/255, green: 176/255, blue: 53/255, alpha: 0.7)
             
+            cell.indexPath = indexPath
+            cell.delegate = self
+            
             return cell
             
         }
@@ -187,5 +219,12 @@ extension TodosViewController: UITableViewDataSource {
         else {
             return 0
         }
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 2 && baseArray[1].count > 0 {
+            return "\(baseArray[1].count) Completed Items"
+        }
+        return ""
     }
 }
