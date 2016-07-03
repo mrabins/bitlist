@@ -13,12 +13,10 @@ class TodosViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
-    
     var baseArray: [[TodoModel]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
         
         editButton.title = "Edit"
@@ -70,8 +68,6 @@ class TodosViewController: UIViewController, UITableViewDelegate {
                 addTodoTableViewCell.addTodoTextField.text = " "
                 addTodoTableViewCell.addTodoTextField.resignFirstResponder()
                 
-                
-                
                 if addTodoTableViewCell.addTodoTextField.text == nil {
                     return addTodoTableViewCell.addTodoTextField.text = " "
                 }
@@ -88,8 +84,7 @@ class TodosViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-    
-    // MARK - Kayboard Notifications
+    // MARK - Keyboard Notifications
     
     func keyboardWillShow(notification: NSNotification) {
         navigationItem.rightBarButtonItem?.title = "Done"

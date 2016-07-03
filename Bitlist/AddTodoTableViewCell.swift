@@ -28,7 +28,6 @@ class AddTodoTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    
     @IBAction func favoriteButtonTapped(sender: UIButton) {
         
         if addTodoTextField.isFirstResponder() {
