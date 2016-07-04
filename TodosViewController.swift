@@ -18,7 +18,7 @@ class TodosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+       
         editButton.title = "Edit"
         view.backgroundColor = UIColor.lightGrayColor()
         
@@ -30,6 +30,14 @@ class TodosViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.backgroundColor = UIColor.clearColor()
+        
+        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressRecognized:")
+        
+        gestureRecognizer.minimumPressDuration = 1.0
+        
+        tableView.addGestureRecognizer(gestureRecognizer)
         
         tableView.tableFooterView = UIView(frame: CGRectZero)
         
@@ -67,11 +75,11 @@ class TodosViewController: UIViewController {
                 
                 tableView.reloadData()
                 
-                addTodoTableViewCell.addTodoTextField.text = " "
+                addTodoTableViewCell.addTodoTextField.text = ""
                 addTodoTableViewCell.addTodoTextField.resignFirstResponder()
                 
                 if addTodoTableViewCell.addTodoTextField.text == nil {
-                    return addTodoTableViewCell.addTodoTextField.text = " "
+                    return addTodoTableViewCell.addTodoTextField.text = ""
                 }
                 
             }
@@ -83,6 +91,16 @@ class TodosViewController: UIViewController {
                 
             }
             
+        }
+    }
+    
+    func longPressRecognized (gestureRecognizer: UILongPressGestureRecognizer) {
+        if !tableView.editing {
+            tableView.editing = true
+            if tableView.editing {
+//                editButton.title = "Done"
+                
+            }
         }
     }
     
