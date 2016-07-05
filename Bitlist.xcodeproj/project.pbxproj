@@ -18,6 +18,7 @@
 		1399FA981CFD4C5D00D7CED1 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1399FA971CFD4C5D00D7CED1 /* TodoModel.swift */; };
 		13CAF3551CFAB5DC009941CE /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CAF3541CFAB5DC009941CE /* TodoTableViewCell.swift */; };
 		13CAF3571CFAB5F0009941CE /* AddTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CAF3561CFAB5F0009941CE /* AddTodoTableViewCell.swift */; };
+		13FABDB71D2B80060014AF04 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FABDB61D2B80060014AF04 /* TodoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		1399FA971CFD4C5D00D7CED1 /* TodoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		13CAF3541CFAB5DC009941CE /* TodoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		13CAF3561CFAB5F0009941CE /* AddTodoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTodoTableViewCell.swift; sourceTree = "<group>"; };
+		13FABDB61D2B80060014AF04 /* TodoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,9 +150,18 @@
 				136AA5BD1CF81658005263A9 /* TodosViewController.swift */,
 				13CAF3541CFAB5DC009941CE /* TodoTableViewCell.swift */,
 				13CAF3561CFAB5F0009941CE /* AddTodoTableViewCell.swift */,
+				13FABDB51D2B7FDF0014AF04 /* TodoViewController */,
 				1399FA941CFD4C1A00D7CED1 /* Model */,
 			);
 			name = "Todo'sViewController";
+			sourceTree = "<group>";
+		};
+		13FABDB51D2B7FDF0014AF04 /* TodoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				13FABDB61D2B80060014AF04 /* TodoViewController.swift */,
+			);
+			name = TodoViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,6 +298,7 @@
 			files = (
 				136AA5951CF815F8005263A9 /* Bitlist.xcdatamodeld in Sources */,
 				136AA5BE1CF81658005263A9 /* TodosViewController.swift in Sources */,
+				13FABDB71D2B80060014AF04 /* TodoViewController.swift in Sources */,
 				136AA58D1CF815F8005263A9 /* AppDelegate.swift in Sources */,
 				1399FA981CFD4C5D00D7CED1 /* TodoModel.swift in Sources */,
 				13CAF3551CFAB5DC009941CE /* TodoTableViewCell.swift in Sources */,

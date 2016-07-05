@@ -22,7 +22,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddTodoCell" id="ZyG-wM-dVQ" customClass="AddTodoTableViewCell" customModule="Bitlist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="330" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="330" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZyG-wM-dVQ" id="Dv5-Jz-zfI">
                                             <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
@@ -48,7 +48,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoCell" id="KbF-6Q-y98" customClass="TodoTableViewCell" customModule="Bitlist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="136" width="330" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="330" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KbF-6Q-y98" id="Kfv-My-LT8">
                                             <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
@@ -110,6 +110,27 @@
             </objects>
             <point key="canvasLocation" x="941" y="-355"/>
         </scene>
+        <!--Todo View Controller-->
+        <scene sceneID="289-5n-cZP">
+            <objects>
+                <viewController id="Bw2-If-b7J" customClass="TodoViewController" customModule="Bitlist" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OmH-P3-Xxk"/>
+                        <viewControllerLayoutGuide type="bottom" id="S1d-xf-FpM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="epn-zq-f7h">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="todosToTodoSegue" id="9zE-KF-48k"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bgw-e3-oBL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1587" y="-355"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="3bU-m9-Y3D">
             <objects>
@@ -129,4 +150,7 @@
             <point key="canvasLocation" x="267" y="-355"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="9zE-KF-48k"/>
+    </inferredMetricsTieBreakers>
 </document>
