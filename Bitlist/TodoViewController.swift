@@ -9,11 +9,25 @@
 import UIKit
 
 class TodoViewController: UIViewController {
-
+    
+    @IBOutlet weak var completeButton: UIBarButtonItem!
+    @IBOutlet weak var favoriteButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        completeButton.title = "Complete"
+        completeButton.tintColor = UIColor.blackColor()
+        
+        favoriteButton.title = "Favorite"
+        favoriteButton.tintColor = UIColor.blackColor()
+        
+        deleteButton.title = "Delete"
+
     }
 
     override func didReceiveMemoryWarning() {
