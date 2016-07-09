@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodoViewController: UIViewController {
+class TodoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var completeButton: UIBarButtonItem!
     @IBOutlet weak var favoriteButton: UIBarButtonItem!
@@ -56,23 +56,18 @@ class TodoViewController: UIViewController {
         
     }
     
-    extension TodoViewController: UITableViewDelegate {
-        
+    // UITableViewDataSource and UITableViewDelegate Functions
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        return UITableViewCell()
     }
     
-    extension TodoViewController: UITableViewDataSource {
-        func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            return UITableViewCell()
-        }
-        
-        func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 0
-        }
-        
-        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-            return 3
-        }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
     }
     
-    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
+    }
 }
+
