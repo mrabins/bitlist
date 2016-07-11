@@ -144,6 +144,13 @@ extension TodosViewController: TodoTableViewCellDelegate {
 
 extension TodosViewController: UITableViewDelegate {
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section != 0 {
+            performSegueWithIdentifier("todosToDoSegue", sender: indexPath)
+            tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        }
+    }
+    
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.separatorInset = UIEdgeInsetsZero
         cell.layoutMargins = UIEdgeInsetsZero
