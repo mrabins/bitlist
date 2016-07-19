@@ -23,6 +23,8 @@ class TodoViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // Do any additional setup after loading the view.
         
+        print(todo)
+        
         completeButton.title = "Complete"
         completeButton.tintColor = UIColor.blackColor()
         
@@ -36,7 +38,11 @@ class TodoViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
+        if todo.completed {
+            navigationItem.leftBarButtonItem?.title = "Pending"
+        }
         
+        navigationItem.title = todo.title
         
     }
     

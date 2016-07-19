@@ -33,7 +33,7 @@ class TodosViewController: UIViewController {
         
         tableView.backgroundColor = UIColor.clearColor()
         
-        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressRecognized:")
+        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(TodosViewController.longPressRecognized(_:)))
         
         gestureRecognizer.minimumPressDuration = 1.0
         
@@ -50,6 +50,16 @@ class TodosViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "todosToDoSegue" {
+            let indexPath = sender as! NSIndexPath
+            let selectedTodo = baseArray[indexPath.section - 1][indexPath.row]
+            
+            let todoViewController = segue.destinationViewController as! TodoViewController
+            todoViewController.todo = selectedTodo
+        }
     }
     
     @IBAction func editBarButtonItemTapped(sender: UIBarButtonItem) {
