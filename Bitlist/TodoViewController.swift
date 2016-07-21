@@ -44,6 +44,15 @@ class TodoViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         navigationItem.title = todo.title
         
+        let swipeView = UISwipeGestureRecognizer(target: self, action: #selector(TodoViewController.respondToSwipe(_:)))
+        swipeView.direction = UISwipeGestureRecognizerDirection.Right
+        
+        navigationController?.navigationBar.addGestureRecognizer(swipeView)
+        
+        let secondSwipeView = UISwipeGestureRecognizer(target: self, action: #selector(TodoViewController.respondToSwipe(_:)))
+        secondSwipeView.direction = UISwipeGestureRecognizerDirection.Right
+        tableView.addGestureRecognizer(secondSwipeView)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,6 +60,9 @@ class TodoViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
     
+    func respondToSwipe(gesture: UIGestureRecognizer) {
+        navigationController?.popViewControllerAnimated(true)
+    }
     
     @IBAction func completeButtonPressed(sender: UIBarButtonItem) {
         
