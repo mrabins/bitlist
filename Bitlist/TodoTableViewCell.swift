@@ -20,6 +20,8 @@ class TodoTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
+    var mainVC: TodosViewController!
+    
     var indexPath: NSIndexPath!
     var delegate: TodoTableViewCellDelegate?
     

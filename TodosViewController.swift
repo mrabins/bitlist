@@ -15,6 +15,8 @@ class TodosViewController: UIViewController {
     
     var baseArray: [[TodoModel]] = []
     
+    var selectedTodoIndexPath: NSIndexPath!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -47,6 +49,12 @@ class TodosViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -59,6 +67,9 @@ class TodosViewController: UIViewController {
             
             let todoViewController = segue.destinationViewController as! TodoViewController
             todoViewController.todo = selectedTodo
+            todoViewController.mainVC = self
+            
+            
         }
     }
     
@@ -157,6 +168,7 @@ extension TodosViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section != 0 {
             performSegueWithIdentifier("todosToDoSegue", sender: indexPath)
+            selectedTodoIndexPath = indexPath
             tableView.deselectRowAtIndexPath(indexPath, animated: false)
         }
     }

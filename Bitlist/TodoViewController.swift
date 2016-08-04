@@ -17,6 +17,7 @@ class TodoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var todo: TodoModel!
     
+    var mainVC: TodosViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,10 @@ class TodoViewController: UIViewController, UITableViewDelegate, UITableViewData
             navigationItem.leftBarButtonItem?.title = "Pending"
         }
         
+        if todo.favorited {
+            navigationItem.rightBarButtonItem?.title = "Unfavorite"
+        }
+        
         navigationItem.title = todo.title
         
         let swipeView = UISwipeGestureRecognizer(target: self, action: #selector(TodoViewController.respondToSwipe(_:)))
@@ -65,10 +70,33 @@ class TodoViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func completeButtonPressed(sender: UIBarButtonItem) {
+        todo.completed = !todo.completed
+        mainVC.baseArray[mainVC.selectedTodoIndexPath.section - 1].removeAtIndex(mainVC.selectedTodoIndexPath.row)
+        
+        if todo.completed {
+            mainVC.baseArray[1].append(todo)
+        } else {
+            mainVC.baseArray[0].append(todo)
+        }
+        navigationController?.popViewControllerAnimated(true)
         
     }
     
     @IBAction func favoriteButtonPressed (sender: UIBarButtonItem) {
+        todo.favorited = !todo.favorited
+        
+        mainVC.baseArray[mainVC.selectedTodoIndexPath.section - 1].removeAtIndex(mainVC.selectedTodoIndexPath.row)
+        if todo.completed {
+            mainVC.baseArray[1].append(todo)
+        } else {
+            mainVC.baseArray[0].append(todo)
+        }
+        
+        if todo.favorited {
+            navigationItem.rightBarButtonItem?.title = "Unfavorite"
+        } else {
+            navigationItem.rightBarButtonItem?.title = "Favorite"
+        }
         
     }
     
