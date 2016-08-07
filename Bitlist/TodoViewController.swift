@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TodoViewController: UIViewController {
     
     @IBOutlet weak var completeButton: UIBarButtonItem!
     @IBOutlet weak var favoriteButton: UIBarButtonItem!
@@ -101,11 +101,32 @@ class TodoViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func deleteButtonPressed(sender: UIBarButtonItem) {
+        mainVC.baseArray[mainVC.selectedTodoIndexPath.section - 1].removeAtIndex(mainVC.selectedTodoIndexPath.row)
+        navigationController?.popViewControllerAnimated(true)
         
     }
     
-    // UITableViewDataSource and UITableViewDelegate Functions
+}
+
+
+extension TodoViewController: UITableViewDelegate {
     
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.separatorInset = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsetsZero
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10.0
+    }
+
+}
+
+extension TodoViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let dateStringFormatter = NSDateFormatter()
@@ -181,5 +202,9 @@ class TodoViewController: UIViewController, UITableViewDelegate, UITableViewData
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
     }
+
+    
 }
+
+
 
