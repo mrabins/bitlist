@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13176D331D5AE5CE001990B5 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13176D321D5AE5CE001990B5 /* DatePickerView.swift */; };
 		136AA58D1CF815F8005263A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136AA58C1CF815F8005263A9 /* AppDelegate.swift */; };
 		136AA5921CF815F8005263A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 136AA5901CF815F8005263A9 /* Main.storyboard */; };
 		136AA5951CF815F8005263A9 /* Bitlist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 136AA5931CF815F8005263A9 /* Bitlist.xcdatamodeld */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		13176D321D5AE5CE001990B5 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		136AA5891CF815F8005263A9 /* Bitlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bitlist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		136AA58C1CF815F8005263A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		136AA5911CF815F8005263A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				13FABDB61D2B80060014AF04 /* TodoViewController.swift */,
+				13176D321D5AE5CE001990B5 /* DatePickerView.swift */,
 			);
 			name = TodoViewController;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				136AA58D1CF815F8005263A9 /* AppDelegate.swift in Sources */,
 				1399FA981CFD4C5D00D7CED1 /* TodoModel.swift in Sources */,
 				13CAF3551CFAB5DC009941CE /* TodoTableViewCell.swift in Sources */,
+				13176D331D5AE5CE001990B5 /* DatePickerView.swift in Sources */,
 				13CAF3571CFAB5F0009941CE /* AddTodoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
