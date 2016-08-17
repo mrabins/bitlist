@@ -15,6 +15,10 @@ class TodoViewController: UIViewController {
     @IBOutlet weak var deleteButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
+    var currentMenuView: UIView?
+    
+    @IBOutlet var datePickerView: DatePickerView!
+    
     var todo: TodoModel!
     
     var mainVC: TodosViewController!
@@ -57,6 +61,12 @@ class TodoViewController: UIViewController {
         let secondSwipeView = UISwipeGestureRecognizer(target: self, action: #selector(TodoViewController.respondToSwipe(_:)))
         secondSwipeView.direction = UISwipeGestureRecognizerDirection.Right
         tableView.addGestureRecognizer(secondSwipeView)
+        
+        datePickerView.frame = CGRectMake(view.frame.origin.x, view.frame.height, view.frame.size.width, datePickerView.frame.height)
+        
+        datePickerView.delegate = self
+        
+        view.addSubview(datePickerView)
         
     }
     
@@ -103,9 +113,34 @@ class TodoViewController: UIViewController {
     @IBAction func deleteButtonPressed(sender: UIBarButtonItem) {
         mainVC.baseArray[mainVC.selectedTodoIndexPath.section - 1].removeAtIndex(mainVC.selectedTodoIndexPath.row)
         navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func presentPicker (menuView: UIView) {
+        
+        currentMenuView = menuView
+        
+        UIView.animateWithDuration(0.6) { () -> Void in
+            menuView.frame = CGRectMake(menuView.frame.origin.x, menuView.frame.origin.y - menuView.frame.size.height, menuView.frame.width, menuView.frame.size.height)
+        }
+        
+     
+    }
+    
+}
+
+extension TodoViewController: DatePickerViewDelegate {
+    
+    func removePressed() {
         
     }
     
+    func donePressed() {
+        
+    }
+    
+    func datePickerValueChanged(date: NSDate) {
+        
+    }
 }
 
 
