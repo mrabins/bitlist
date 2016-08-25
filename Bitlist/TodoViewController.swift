@@ -18,6 +18,8 @@ class TodoViewController: UIViewController {
     var currentMenuView: UIView?
     
     @IBOutlet var datePickerView: DatePickerView!
+    @IBOutlet var repeatPickerView: RepeatView!
+    @IBOutlet var reminderPickerView: DatePickerView!
     
     var todo: TodoModel!
     
@@ -68,6 +70,15 @@ class TodoViewController: UIViewController {
         
         view.addSubview(datePickerView)
         
+        repeatPickerView.frame = CGRectMake(view.frame.origin.x, view.frame.size.height, view.frame.size.width, datePickerView.frame.height)
+        
+        repeatPickerView.delegate = self
+        
+        view.addSubview(repeatPickerView)
+        
+        reminderPickerView.frame = CGRectMake(view.frame.origin.x, view.frame.size.height, view.frame.size.width, reminderPickerView.frame.height)
+        reminderPickerView?.delegate = self
+        view.addSubview(reminderPickerView)
     }
     
     override func didReceiveMemoryWarning() {
@@ -132,7 +143,23 @@ class TodoViewController: UIViewController {
             }
         }
     }
+}
+
+extension TodoViewController: RepeatViewDelegate {
+    func remove() {
+        dismissPicker()
+        todo.repeated = nil
+        tableView.reloadData()
+    }
     
+    func done() {
+        dismissPicker()
+    }
+    
+    func pickerViewDidSelect(type: RepeatType) {
+        todo.repeated = type
+        tableView.reloadData()
+    }
 }
 
 extension TodoViewController: DatePickerViewDelegate {
@@ -141,6 +168,9 @@ extension TodoViewController: DatePickerViewDelegate {
         if let menuView = currentMenuView {
             if menuView == datePickerView {
                 todo.dueDate = nil
+            }
+            else if menuView == reminderPickerView {
+                todo.reminder = nil
             }
         }
         dismissPicker()
@@ -156,6 +186,9 @@ extension TodoViewController: DatePickerViewDelegate {
         if let menuView = currentMenuView {
             if menuView == datePickerView {
                 todo.dueDate = date
+            }
+            else if menuView == reminderPickerView {
+                todo.reminder = date
             }
         }
         tableView.reloadData()
@@ -176,6 +209,10 @@ extension TodoViewController: UITableViewDelegate {
         switch (indexPath.section, indexPath.row) {
         case (0,0) :
             pickerView = datePickerView
+            case (0, 1):
+            pickerView = repeatPickerView
+        case (1,0):
+            pickerView = reminderPickerView
         default: break
         }
         
