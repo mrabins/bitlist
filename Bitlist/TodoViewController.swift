@@ -122,8 +122,15 @@ class TodoViewController: UIViewController {
         UIView.animateWithDuration(0.6) { () -> Void in
             menuView.frame = CGRectMake(menuView.frame.origin.x, menuView.frame.origin.y - menuView.frame.size.height, menuView.frame.width, menuView.frame.size.height)
         }
-        
-     
+    }
+    
+    func dismissPicker() {
+        UIView.animateWithDuration(1.0) { () -> Void in
+            if let picker = self.currentMenuView {
+                self.currentMenuView = nil
+                picker.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.size.height, self.view.frame.size.width, picker.frame.height)
+            }
+        }
     }
     
 }
@@ -131,20 +138,53 @@ class TodoViewController: UIViewController {
 extension TodoViewController: DatePickerViewDelegate {
     
     func removePressed() {
-        
+        if let menuView = currentMenuView {
+            if menuView == datePickerView {
+                todo.dueDate = nil
+            }
+        }
+        dismissPicker()
+        tableView.reloadData()
     }
     
     func donePressed() {
+        dismissPicker()
         
     }
     
     func datePickerValueChanged(date: NSDate) {
-        
+        if let menuView = currentMenuView {
+            if menuView == datePickerView {
+                todo.dueDate = date
+            }
+        }
+        tableView.reloadData()
     }
 }
 
 
 extension TodoViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let currentMenu = currentMenuView
+        
+        dismissPicker()
+        
+        var pickerView: UIView?
+        
+        switch (indexPath.section, indexPath.row) {
+        case (0,0) :
+            pickerView = datePickerView
+        default: break
+        }
+        
+        if let viewForPicker = pickerView where currentMenu != pickerView {
+            presentPicker(viewForPicker)
+        }
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.separatorInset = UIEdgeInsetsZero
