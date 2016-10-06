@@ -9,8 +9,8 @@
 import UIKit
 
 protocol TodoTableViewCellDelegate {
-    func completeTodo(indexPath: NSIndexPath)
-    func favoriteTodo(indexPath: NSIndexPath)
+    func completeTodo(_ indexPath: IndexPath)
+    func favoriteTodo(_ indexPath: IndexPath)
 }
 
 class TodoTableViewCell: UITableViewCell {
@@ -22,7 +22,7 @@ class TodoTableViewCell: UITableViewCell {
     
     var mainVC: TodosViewController!
     
-    var indexPath: NSIndexPath!
+    var indexPath: IndexPath!
     var delegate: TodoTableViewCellDelegate?
     
     override func awakeFromNib() {
@@ -31,32 +31,32 @@ class TodoTableViewCell: UITableViewCell {
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    @IBAction func completeButtonTapped(sender: UIButton) {
+    @IBAction func completeButtonTapped(_ sender: UIButton) {
         delegate?.completeTodo(indexPath)
         
     }
     
-    @IBAction func favoriteButtonTapped(sender: UIButton) {
+    @IBAction func favoriteButtonTapped(_ sender: UIButton) {
         delegate?.favoriteTodo(indexPath)
     }
     
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
         if editing {
-            dateLabel.hidden = true
-            completeButton.hidden = true
-            favoriteButton.hidden = true
+            dateLabel.isHidden = true
+            completeButton.isHidden = true
+            favoriteButton.isHidden = true
         } else {
-            dateLabel.hidden = false
-            completeButton.hidden = false
-            favoriteButton.hidden = false
+            dateLabel.isHidden = false
+            completeButton.isHidden = false
+            favoriteButton.isHidden = false
         }
     }
 

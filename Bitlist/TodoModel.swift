@@ -9,20 +9,20 @@
 import Foundation
 
 enum RepeatType: Int {
-    case Daily = 0
-    case Weekly = 1
-    case Monthly = 2
-    case Yearly = 3
+    case daily = 0
+    case weekly = 1
+    case monthly = 2
+    case yearly = 3
 }
 
 
 struct TodoModel {
     var title: String
     var favorited: Bool
-    var dueDate: NSDate?
+    var dueDate: Date?
     var completed: Bool
     
     var repeated: RepeatType?
-    var reminder: NSDate?
+    var reminder: Date?
     
 }

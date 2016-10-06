@@ -22,22 +22,22 @@ class AddTodoTableViewCell: UITableViewCell {
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    @IBAction func favoriteButtonTapped(sender: UIButton) {
+    @IBAction func favoriteButtonTapped(_ sender: UIButton) {
         
-        if addTodoTextField.isFirstResponder() {
+        if addTodoTextField.isFirstResponder {
             favorited = !favorited
             
             if favorited {
-                favoriteButton.backgroundColor = UIColor.blueColor()
+                favoriteButton.backgroundColor = UIColor.blue
             }
             else {
-                favoriteButton.backgroundColor = UIColor.orangeColor()
+                favoriteButton.backgroundColor = UIColor.orange
             }
         }
         

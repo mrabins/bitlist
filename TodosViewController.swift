@@ -15,25 +15,25 @@ class TodosViewController: UIViewController {
     
     var baseArray: [[TodoModel]] = []
     
-    var selectedTodoIndexPath: NSIndexPath!
+    var selectedTodoIndexPath: IndexPath!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
        
         editButton.title = "Edit"
-        view.backgroundColor = UIColor.lightGrayColor()
+        view.backgroundColor = UIColor.lightGray
         
-        let todo1 = TodoModel(title: "Study iOS", favorited: false, dueDate: NSDate(), completed: false, repeated: nil, reminder: nil)
+        let todo1 = TodoModel(title: "Study iOS", favorited: false, dueDate: Date(), completed: false, repeated: nil, reminder: nil)
         let todo2 = TodoModel(title: "Eat Dinner", favorited: false, dueDate: nil, completed: false, repeated: nil, reminder: nil)
-        let todo3 = TodoModel(title: "Gym", favorited: false, dueDate: NSDate(), completed: false, repeated: nil, reminder: nil)
+        let todo3 = TodoModel(title: "Gym", favorited: false, dueDate: Date(), completed: false, repeated: nil, reminder: nil)
         
         baseArray = [[todo1, todo2, todo3], []]
         
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.backgroundColor = UIColor.clear
         
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(TodosViewController.longPressRecognized(_:)))
         
@@ -41,15 +41,15 @@ class TodosViewController: UIViewController {
         
         tableView.addGestureRecognizer(gestureRecognizer)
         
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(TodosViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(TodosViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TodosViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TodosViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()
         
@@ -60,12 +60,12 @@ class TodosViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "todosToDoSegue" {
-            let indexPath = sender as! NSIndexPath
-            let selectedTodo = baseArray[indexPath.section - 1][indexPath.row]
+            let indexPath = sender as! IndexPath
+            let selectedTodo = baseArray[(indexPath as NSIndexPath).section - 1][(indexPath as NSIndexPath).row]
             
-            let todoViewController = segue.destinationViewController as! TodoViewController
+            let todoViewController = segue.destination as! TodoViewController
             todoViewController.todo = selectedTodo
             todoViewController.mainVC = self
             
@@ -73,9 +73,9 @@ class TodosViewController: UIViewController {
         }
     }
     
-    @IBAction func editBarButtonItemTapped(sender: UIBarButtonItem) {
+    @IBAction func editBarButtonItemTapped(_ sender: UIBarButtonItem) {
         if sender.title == "Edit" {
-            if tableView.editing {
+            if tableView.isEditing {
                 tableView.setEditing(false, animated: true)
             }
             else {
@@ -84,9 +84,9 @@ class TodosViewController: UIViewController {
         }
             
         else if sender.title == "Done" {
-            let indexPathOfAddTodoCell = NSIndexPath(forRow: 0, inSection: 0)
+            let indexPathOfAddTodoCell = IndexPath(row: 0, section: 0)
             
-            let addTodoTableViewCell = tableView.cellForRowAtIndexPath(indexPathOfAddTodoCell) as! AddTodoTableViewCell
+            let addTodoTableViewCell = tableView.cellForRow(at: indexPathOfAddTodoCell) as! AddTodoTableViewCell
             
             if addTodoTableViewCell.addTodoTextField.text != "" {
                 
@@ -106,19 +106,19 @@ class TodosViewController: UIViewController {
             }
             else {
                 
-                let alert = UIAlertController(title: "Invalid Todo", message: "Please enter a title before adding a todo", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                presentViewController(alert, animated: true, completion: nil)
+                let alert = UIAlertController(title: "Invalid Todo", message: "Please enter a title before adding a todo", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                present(alert, animated: true, completion: nil)
                 
             }
             
         }
     }
     
-    func longPressRecognized (gestureRecognizer: UILongPressGestureRecognizer) {
-        if !tableView.editing {
-            tableView.editing = true
-            if tableView.editing {
+    func longPressRecognized (_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if !tableView.isEditing {
+            tableView.isEditing = true
+            if tableView.isEditing {
 //                editButton.title = "Done"
                 
             }
@@ -127,58 +127,58 @@ class TodosViewController: UIViewController {
     
     // MARK - Keyboard Notifications
     
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(_ notification: Notification) {
         navigationItem.rightBarButtonItem?.title = "Done"
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: Notification) {
         navigationItem.rightBarButtonItem?.title = "Edit"
     }
 }
 
 extension TodosViewController: TodoTableViewCellDelegate {
-    func completeTodo(indexPath: NSIndexPath) {
+    func completeTodo(_ indexPath: IndexPath) {
         print("Complete Todo")
         
-        var selectedTodo = baseArray[indexPath.section - 1][indexPath.row]
+        var selectedTodo = baseArray[(indexPath as NSIndexPath).section - 1][(indexPath as NSIndexPath).row]
         selectedTodo.completed = !selectedTodo.completed
         
-        if indexPath.section == 1 {
+        if (indexPath as NSIndexPath).section == 1 {
             baseArray[1].append(selectedTodo)
         } else {
             baseArray[0].append(selectedTodo)
         }
-        baseArray[indexPath.section - 1].removeAtIndex(indexPath.row)
+        baseArray[(indexPath as NSIndexPath).section - 1].remove(at: (indexPath as NSIndexPath).row)
         tableView.reloadData()
         
     }
     
-    func favoriteTodo(indexPath: NSIndexPath) {
+    func favoriteTodo(_ indexPath: IndexPath) {
         print("Favorite Todo")
-        var selectedToDo = baseArray[indexPath.section - 1][indexPath.row]
+        var selectedToDo = baseArray[(indexPath as NSIndexPath).section - 1][(indexPath as NSIndexPath).row]
         selectedToDo.favorited = !selectedToDo.favorited
         
-        baseArray[indexPath.section - 1][indexPath.row] = selectedToDo
+        baseArray[(indexPath as NSIndexPath).section - 1][(indexPath as NSIndexPath).row] = selectedToDo
         tableView.reloadData()
     }
 }
 
 extension TodosViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section != 0 {
-            performSegueWithIdentifier("todosToDoSegue", sender: indexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).section != 0 {
+            performSegue(withIdentifier: "todosToDoSegue", sender: indexPath)
             selectedTodoIndexPath = indexPath
-            tableView.deselectRowAtIndexPath(indexPath, animated: false)
+            tableView.deselectRow(at: indexPath, animated: false)
         }
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 2 && baseArray[1].count > 0 {
             //header height - Might want to change this
             return 25
@@ -186,91 +186,91 @@ extension TodosViewController: UITableViewDelegate {
         return 0
     }
     
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 10.0
     }
     
-    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        if tableView.editing {
-            return UITableViewCellEditingStyle.None
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        if tableView.isEditing {
+            return UITableViewCellEditingStyle.none
         }
-        return UITableViewCellEditingStyle.Delete
+        return UITableViewCellEditingStyle.delete
     }
     
-    func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
     }
 }
 
 extension TodosViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if indexPath.section == 0{
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if (indexPath as NSIndexPath).section == 0{
             return false
         }
         return true
     }
     
-    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if indexPath.section == 1 {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        if (indexPath as NSIndexPath).section == 1 {
             return true
         } else {
             return false
         }
     }
     
-    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-        let currentToDo = baseArray[0][sourceIndexPath.row]
-        baseArray[0].removeAtIndex(sourceIndexPath.row)
-        baseArray[0].insert(currentToDo, atIndex: destinationIndexPath.row)
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let currentToDo = baseArray[0][(sourceIndexPath as NSIndexPath).row]
+        baseArray[0].remove(at: (sourceIndexPath as NSIndexPath).row)
+        baseArray[0].insert(currentToDo, at: (destinationIndexPath as NSIndexPath).row)
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        if editingStyle == UITableViewCellEditingStyle.Delete {
+        if editingStyle == UITableViewCellEditingStyle.delete {
             tableView.beginUpdates()
-            baseArray[indexPath.section - 1].removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths ([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            baseArray[(indexPath as NSIndexPath).section - 1].remove(at: (indexPath as NSIndexPath).row)
+            tableView.deleteRows (at: [indexPath], with: UITableViewRowAnimation.automatic)
             tableView.endUpdates()
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
-            let cell: AddTodoTableViewCell = tableView.dequeueReusableCellWithIdentifier("AddTodoCell") as! AddTodoTableViewCell
+        if (indexPath as NSIndexPath).section == 0 {
+            let cell: AddTodoTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AddTodoCell") as! AddTodoTableViewCell
             cell.backgroundColor = UIColor(red: 208/255, green: 198/255, blue: 177/255, alpha: 0.7)
-            cell.favoriteButton.backgroundColor = UIColor.orangeColor()
+            cell.favoriteButton.backgroundColor = UIColor.orange
             return cell
-        } else if indexPath.section == 1 || indexPath.section == 2 {
-            let currentTodo = baseArray[indexPath.section - 1][indexPath.row]
-            let cell: TodoTableViewCell = tableView.dequeueReusableCellWithIdentifier("TodoCell") as! TodoTableViewCell
+        } else if (indexPath as NSIndexPath).section == 1 || (indexPath as NSIndexPath).section == 2 {
+            let currentTodo = baseArray[(indexPath as NSIndexPath).section - 1][(indexPath as NSIndexPath).row]
+            let cell: TodoTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TodoCell") as! TodoTableViewCell
             cell.titleLabel.text = currentTodo.title
             
-            let dateStringFormatter = NSDateFormatter()
+            let dateStringFormatter = DateFormatter()
             dateStringFormatter.dateFormat = "yyyy-MM-dd"
             
             if let date = currentTodo.dueDate {
-                let dateString = dateStringFormatter.stringFromDate(date)
+                let dateString = dateStringFormatter.string(from: date as Date)
                 cell.dateLabel.text = dateString
             }
             
-            if indexPath.section == 1 {
-                cell.completeButton.backgroundColor = UIColor.redColor()
+            if (indexPath as NSIndexPath).section == 1 {
+                cell.completeButton.backgroundColor = UIColor.red
             }
             else {
-                cell.completeButton.backgroundColor = UIColor.greenColor()
+                cell.completeButton.backgroundColor = UIColor.green
             }
             
             if currentTodo.favorited  {
-                cell.favoriteButton.backgroundColor = UIColor.blueColor()
+                cell.favoriteButton.backgroundColor = UIColor.blue
             }
             else {
-                cell.favoriteButton.backgroundColor = UIColor.orangeColor()
+                cell.favoriteButton.backgroundColor = UIColor.orange
             }
             
             cell.backgroundColor = UIColor(red: 235/255, green: 176/255, blue: 53/255, alpha: 0.7)
@@ -286,11 +286,11 @@ extension TodosViewController: UITableViewDataSource {
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         }
@@ -305,7 +305,7 @@ extension TodosViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 2 && baseArray[1].count > 0 {
             return "\(baseArray[1].count) Completed Items"
         }

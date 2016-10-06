@@ -11,7 +11,7 @@ import UIKit
 protocol RepeatViewDelegate {
     func remove()
     func done()
-    func pickerViewDidSelect(type: RepeatType)
+    func pickerViewDidSelect(_ type: RepeatType)
 }
 
 class RepeatView: UIView {
@@ -27,18 +27,18 @@ class RepeatView: UIView {
         pickerView.delegate = self
     }
 
-    @IBAction func removeBarButtonItemPressed(sender: UIBarButtonItem) {
+    @IBAction func removeBarButtonItemPressed(_ sender: UIBarButtonItem) {
         delegate?.remove()
     }
     
-    @IBAction func doneBarButtonItemPressed(sender: UIBarButtonItem) {
+    @IBAction func doneBarButtonItemPressed(_ sender: UIBarButtonItem) {
         delegate?.done()
     }
 
 }
 
 extension RepeatView: UIPickerViewDelegate {
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         switch row {
         case 0:
@@ -53,7 +53,7 @@ extension RepeatView: UIPickerViewDelegate {
         }
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let repeatValue = RepeatType(rawValue: row)!
         delegate?.pickerViewDidSelect(repeatValue)
     }
@@ -61,11 +61,11 @@ extension RepeatView: UIPickerViewDelegate {
 
 extension RepeatView: UIPickerViewDataSource {
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return 4
     }
 }

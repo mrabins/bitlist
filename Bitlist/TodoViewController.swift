@@ -33,17 +33,17 @@ class TodoViewController: UIViewController {
         print(todo)
         
         completeButton.title = "Complete"
-        completeButton.tintColor = UIColor.blackColor()
+        completeButton.tintColor = UIColor.black
         
         favoriteButton.title = "Favorite"
-        favoriteButton.tintColor = UIColor.blackColor()
+        favoriteButton.tintColor = UIColor.black
         
         deleteButton.title = "Delete"
         
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
         if todo.completed {
             navigationItem.leftBarButtonItem?.title = "Pending"
@@ -56,27 +56,27 @@ class TodoViewController: UIViewController {
         navigationItem.title = todo.title
         
         let swipeView = UISwipeGestureRecognizer(target: self, action: #selector(TodoViewController.respondToSwipe(_:)))
-        swipeView.direction = UISwipeGestureRecognizerDirection.Right
+        swipeView.direction = UISwipeGestureRecognizerDirection.right
         
         navigationController?.navigationBar.addGestureRecognizer(swipeView)
         
         let secondSwipeView = UISwipeGestureRecognizer(target: self, action: #selector(TodoViewController.respondToSwipe(_:)))
-        secondSwipeView.direction = UISwipeGestureRecognizerDirection.Right
+        secondSwipeView.direction = UISwipeGestureRecognizerDirection.right
         tableView.addGestureRecognizer(secondSwipeView)
         
-        datePickerView.frame = CGRectMake(view.frame.origin.x, view.frame.height, view.frame.size.width, datePickerView.frame.height)
+        datePickerView.frame = CGRect(x: view.frame.origin.x, y: view.frame.height, width: view.frame.size.width, height: datePickerView.frame.height)
         
         datePickerView.delegate = self
         
         view.addSubview(datePickerView)
         
-        repeatPickerView.frame = CGRectMake(view.frame.origin.x, view.frame.size.height, view.frame.size.width, datePickerView.frame.height)
+        repeatPickerView.frame = CGRect(x: view.frame.origin.x, y: view.frame.size.height, width: view.frame.size.width, height: datePickerView.frame.height)
         
         repeatPickerView.delegate = self
         
         view.addSubview(repeatPickerView)
         
-        reminderPickerView.frame = CGRectMake(view.frame.origin.x, view.frame.size.height, view.frame.size.width, reminderPickerView.frame.height)
+        reminderPickerView.frame = CGRect(x: view.frame.origin.x, y: view.frame.size.height, width: view.frame.size.width, height: reminderPickerView.frame.height)
         reminderPickerView?.delegate = self
         view.addSubview(reminderPickerView)
     }
@@ -86,27 +86,27 @@ class TodoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func respondToSwipe(gesture: UIGestureRecognizer) {
-        navigationController?.popViewControllerAnimated(true)
+    func respondToSwipe(_ gesture: UIGestureRecognizer) {
+        navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func completeButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func completeButtonPressed(_ sender: UIBarButtonItem) {
         todo.completed = !todo.completed
-        mainVC.baseArray[mainVC.selectedTodoIndexPath.section - 1].removeAtIndex(mainVC.selectedTodoIndexPath.row)
+        mainVC.baseArray[mainVC.selectedTodoIndexPath.section - 1].remove(at: mainVC.selectedTodoIndexPath.row)
         
         if todo.completed {
             mainVC.baseArray[1].append(todo)
         } else {
             mainVC.baseArray[0].append(todo)
         }
-        navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewController(animated: true)
         
     }
     
-    @IBAction func favoriteButtonPressed (sender: UIBarButtonItem) {
+    @IBAction func favoriteButtonPressed (_ sender: UIBarButtonItem) {
         todo.favorited = !todo.favorited
         
-        mainVC.baseArray[mainVC.selectedTodoIndexPath.section - 1].removeAtIndex(mainVC.selectedTodoIndexPath.row)
+        mainVC.baseArray[mainVC.selectedTodoIndexPath.section - 1].remove(at: mainVC.selectedTodoIndexPath.row)
         if todo.completed {
             mainVC.baseArray[1].append(todo)
         } else {
@@ -121,27 +121,27 @@ class TodoViewController: UIViewController {
         
     }
     
-    @IBAction func deleteButtonPressed(sender: UIBarButtonItem) {
-        mainVC.baseArray[mainVC.selectedTodoIndexPath.section - 1].removeAtIndex(mainVC.selectedTodoIndexPath.row)
-        navigationController?.popViewControllerAnimated(true)
+    @IBAction func deleteButtonPressed(_ sender: UIBarButtonItem) {
+        mainVC.baseArray[mainVC.selectedTodoIndexPath.section - 1].remove(at: mainVC.selectedTodoIndexPath.row)
+        navigationController?.popViewController(animated: true)
     }
     
-    func presentPicker (menuView: UIView) {
+    func presentPicker (_ menuView: UIView) {
         
         currentMenuView = menuView
         
-        UIView.animateWithDuration(0.6) { () -> Void in
-            menuView.frame = CGRectMake(menuView.frame.origin.x, menuView.frame.origin.y - menuView.frame.size.height, menuView.frame.width, menuView.frame.size.height)
-        }
+        UIView.animate(withDuration: 0.6, animations: { () -> Void in
+            menuView.frame = CGRect(x: menuView.frame.origin.x, y: menuView.frame.origin.y - menuView.frame.size.height, width: menuView.frame.width, height: menuView.frame.size.height)
+        }) 
     }
     
     func dismissPicker() {
-        UIView.animateWithDuration(1.0) { () -> Void in
+        UIView.animate(withDuration: 1.0, animations: { () -> Void in
             if let picker = self.currentMenuView {
                 self.currentMenuView = nil
-                picker.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.size.height, self.view.frame.size.width, picker.frame.height)
+                picker.frame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.size.height, width: self.view.frame.size.width, height: picker.frame.height)
             }
-        }
+        }) 
     }
 }
 
@@ -156,7 +156,7 @@ extension TodoViewController: RepeatViewDelegate {
         dismissPicker()
     }
     
-    func pickerViewDidSelect(type: RepeatType) {
+    func pickerViewDidSelect(_ type: RepeatType) {
         todo.repeated = type
         tableView.reloadData()
     }
@@ -182,7 +182,7 @@ extension TodoViewController: DatePickerViewDelegate {
         
     }
     
-    func datePickerValueChanged(date: NSDate) {
+    func datePickerValueChanged(_ date: Date) {
         if let menuView = currentMenuView {
             if menuView == datePickerView {
                 todo.dueDate = date
@@ -198,7 +198,7 @@ extension TodoViewController: DatePickerViewDelegate {
 
 extension TodoViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let currentMenu = currentMenuView
         
@@ -206,7 +206,7 @@ extension TodoViewController: UITableViewDelegate {
         
         var pickerView: UIView?
         
-        switch (indexPath.section, indexPath.row) {
+        switch ((indexPath as NSIndexPath).section, (indexPath as NSIndexPath).row) {
         case (0,0) :
             pickerView = datePickerView
             case (0, 1):
@@ -216,82 +216,82 @@ extension TodoViewController: UITableViewDelegate {
         default: break
         }
         
-        if let viewForPicker = pickerView where currentMenu != pickerView {
+        if let viewForPicker = pickerView , currentMenu != pickerView {
             presentPicker(viewForPicker)
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
     }
     
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 10.0
     }
 
 }
 
 extension TodoViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let dateStringFormatter = NSDateFormatter()
-        dateStringFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+        let dateStringFormatter = DateFormatter()
+        dateStringFormatter.dateStyle = DateFormatter.Style.long
         
-        let timeStringFormatter = NSDateFormatter()
+        let timeStringFormatter = DateFormatter()
         timeStringFormatter.dateFormat = "HH:mm:ss"
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             
-            let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell")!
+            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
             
-            if indexPath.row == 0 {
+            if (indexPath as NSIndexPath).row == 0 {
                 cell.imageView?.image = UIImage(named: "calendar")
                 
                 if let dueDate = todo.dueDate {
                     
-                    let dateString = dateStringFormatter.stringFromDate(dueDate)
+                    let dateString = dateStringFormatter.string(from: dueDate as Date)
                     cell.textLabel?.text = "Due " + dateString
-                    cell.textLabel?.textColor = UIColor.blueColor()
-                    cell.textLabel?.font = UIFont.boldSystemFontOfSize(17.0)
+                    cell.textLabel?.textColor = UIColor.blue
+                    cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
                 } else {
                     cell.textLabel?.text = "Due Date"
-                    cell.textLabel?.textColor = UIColor.lightGrayColor()
+                    cell.textLabel?.textColor = UIColor.lightGray
                 }
             } else {
                 cell.imageView?.image = UIImage(named: "repeat")
                 if let repeatFrequency = todo.repeated {
                     cell.textLabel?.text = "Repeat \(repeatFrequency)"
-                    cell.textLabel?.textColor = UIColor.blueColor()
-                    cell.textLabel?.font = UIFont.boldSystemFontOfSize(17.0)
+                    cell.textLabel?.textColor = UIColor.blue
+                    cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
                 } else {
                     cell.textLabel?.text = "Repeat"
-                    cell.textLabel?.textColor = UIColor.lightGrayColor()
+                    cell.textLabel?.textColor = UIColor.lightGray
                 }
                 
             }
             return cell
         }
-        else if indexPath.section == 1 {
-            let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("Reminder")!
+        else if (indexPath as NSIndexPath).section == 1 {
+            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Reminder")!
             cell.imageView?.image = UIImage(named: "alarmclock")
             if let reminderDate = todo.reminder {
-                let timeString = timeStringFormatter.stringFromDate(reminderDate)
+                let timeString = timeStringFormatter.string(from: reminderDate as Date)
                 cell.textLabel?.text = "Remind me at " + timeString
-                cell.textLabel?.textColor = UIColor.blueColor()
-                cell.textLabel?.font = UIFont.boldSystemFontOfSize(17.0)
+                cell.textLabel?.textColor = UIColor.blue
+                cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
                 
-                let dateString = dateStringFormatter.stringFromDate(reminderDate)
+                let dateString = dateStringFormatter.string(from: reminderDate as Date)
                 cell.detailTextLabel?.text = dateString
             } else {
                 cell.textLabel?.text = "Reminder"
-                cell.textLabel?.textColor = UIColor.lightGrayColor()
+                cell.textLabel?.textColor = UIColor.lightGray
                 cell.detailTextLabel?.text = ""
             }
             return cell
@@ -300,7 +300,7 @@ extension TodoViewController: UITableViewDataSource {
         return UITableViewCell()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 2
         } else if section == 1{
@@ -311,7 +311,7 @@ extension TodoViewController: UITableViewDataSource {
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
 

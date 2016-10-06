@@ -11,7 +11,7 @@ import UIKit
 protocol DatePickerViewDelegate {
     func removePressed()
     func donePressed()
-    func datePickerValueChanged(date: NSDate)
+    func datePickerValueChanged(_ date: Date)
 }
 
 class DatePickerView: UIView {
@@ -21,17 +21,17 @@ class DatePickerView: UIView {
     var delegate: DatePickerViewDelegate?
     
     
-    @IBAction func removeBarButtonItemPressed(sender: UIBarButtonItem) {
+    @IBAction func removeBarButtonItemPressed(_ sender: UIBarButtonItem) {
         delegate?.removePressed()
         
     }
     
-    @IBAction func doneBarButtonItemPressed(sender: UIBarButtonItem) {
+    @IBAction func doneBarButtonItemPressed(_ sender: UIBarButtonItem) {
         delegate?.donePressed()
         
     }
     
-    @IBAction func datePickerChanged(sender: UIDatePicker) {
+    @IBAction func datePickerChanged(_ sender: UIDatePicker) {
         delegate?.datePickerValueChanged(sender.date)
         
     }
